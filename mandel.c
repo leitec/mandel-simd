@@ -5,6 +5,7 @@
 #include "mandel.h"
 
 void mandel_basic(unsigned char *image, const struct spec *s);
+void mandel_3dnow(unsigned char *image, const struct spec *s);
 void mandel_altivec(unsigned char *image, const struct spec *s);
 void mandel_avx(unsigned char *image, const struct spec *s);
 void mandel_sse2(unsigned char *image, const struct spec *s);
@@ -141,8 +142,8 @@ main(int argc, char *argv[])
     unsigned char *image = malloc(spec.width * spec.height * 3);
 
     #ifdef __x86_64__
-    if (use_avx && is_avx_supported())
-        mandel_avx(image, &spec);
+    if (use_avx)
+        mandel_3dnow(image, &spec);
     else if (use_sse2)
         mandel_sse2(image, &spec);
     #endif // __x86_64__
