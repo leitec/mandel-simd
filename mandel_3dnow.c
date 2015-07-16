@@ -58,7 +58,7 @@ mandel_3dnow(unsigned char *image, const struct spec *s)
                 int imask[2];
                 *(v2si *)&imask = mask;
 
-                if (imask[0] || imask[1])
+                if (imask[0] && imask[1])
                     break;
             }
 
