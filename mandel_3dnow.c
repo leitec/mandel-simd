@@ -53,8 +53,7 @@ mandel_3dnow(unsigned char *image, const struct spec *s)
                 zi2 = __builtin_ia32_pfmul(zi, zi);
                 v2sf mag2 = __builtin_ia32_pfadd(zr2, zi2);
                 v2si mask = __builtin_ia32_pfcmpge(mag2, threshold);
-                mk = __builtin_ia32_paddd(mk, one);
-                mk = __builtin_ia32_psubd(mk, __builtin_ia32_pand(one, mask));
+                mk = __builtin_ia32_paddd(mk, __builtin_ia32_paddd(one, mask));
 
                 /* Early bailout? */
                 int imask[2];
